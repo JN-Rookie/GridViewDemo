@@ -50,23 +50,45 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
         for (int i = 0; i < strings.length; i++) {
+            RelativeLayout layout=new RelativeLayout(this);
+            layout.setBackgroundColor(Color.rgb(249,248,248));
             tv1 = new TextView(this);
             tv1.setText("asd");
-            linerLayout.addView(tv1);
+            tv1.setTextSize(20);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);//与父容器的左侧对齐
+            lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);//与父容器的上侧对齐
+            lp.leftMargin=30;
+            lp.topMargin=30;
+            tv1.setId(R.id.my_text);//设置这个View 的id
+            tv1.setLayoutParams(lp);//设置布局参数
+            layout.addView(tv1);
             lv = new MyGridView(this);
             lv.setNumColumns(3);
-            lv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
+            lv.setId(R.id.my_gridview);
+            RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp1.addRule(RelativeLayout.BELOW, R.id.my_text);
+            lp1.topMargin=20;
+            lp1.bottomMargin=20;
+            lv.setLayoutParams(lp1);
             ListAdapter adapter = new SimpleAdapter(this, data, R.layout.item_gridview, new String[]{"title", "Image"},
                     new int[]{R.id.gv_text, R.id.gv_image});
             lv.setAdapter(adapter);
-            lv.setBackgroundColor(Color.YELLOW);
-            linerLayout.addView(lv);
+            layout.addView(lv);
             view= new View(this);
-            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    20));
+            RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT, 20);
             view.setBackgroundColor(Color.WHITE);
-            linerLayout.addView(view);
+            lp2.addRule(RelativeLayout.BELOW,R.id.my_gridview);
+            view.setId(R.id.my_view);
+            view.setLayoutParams(lp2);
+            if(i<strings.length-1){
+                layout.addView(view);
+            }
+
+            linerLayout.addView(layout);
         }
 
 
