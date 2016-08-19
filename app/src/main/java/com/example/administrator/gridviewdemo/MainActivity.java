@@ -30,9 +30,9 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout linerLayout;
-    String[] strings = new String[6];
+    String[] strings = new String[3];
     private TextView tv1;
-    private GridView lv;
+    private MyGridView lv;
     private View view;
     private List<Map<String, Object>> data;
 
@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
             tv1 = new TextView(this);
             tv1.setText("asd");
             linerLayout.addView(tv1);
-            lv = new GridView(this);
+            lv = new MyGridView(this);
             lv.setNumColumns(3);
             lv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             ListAdapter adapter = new SimpleAdapter(this, data, R.layout.item_gridview, new String[]{"title", "Image"},
                     new int[]{R.id.gv_text, R.id.gv_image});
             lv.setAdapter(adapter);
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         for (int j = 0; j < strings.length; j++) {
             data = new ArrayList<>();
             Map<String, Object> map = new HashMap<>();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 7; i++) {
                 map.put("title", "1"+i);
                 map.put("Image", R.mipmap.ic_launcher);
                 data.add(map);
